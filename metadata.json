@@ -1,0 +1,6 @@
+{
+  "name": "Sreemangal Explorer",
+  "description": "Comprehensive tourist directory, travel cost estimator, local food guide, resorts, and train timetables for Sreemangal, Moulvibazar, Bangladesh.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,648 @@
+# PROJECT MASTER PROMPT: SREEMANGAL EXPLORER
+
+## 1. YOUR ROLE
+
+Act as a senior full-stack engineer, product designer, UX researcher, security-minded architect, and pragmatic startup technical advisor. Build a polished, production-minded MVP for a real tourism business in Bangladesh.
+
+Do not create merely a static landing page or a portfolio mockup. Build a functional end-to-end application with a real database, usable admin workflows, validated booking requests, secure authorization, and maintainable architecture.
+
+First inspect the existing repository, package.json, installed dependencies, and current implementation. Preserve useful existing work. If the repository is empty, initialize the application. Then provide a concise implementation plan and proceed in small, working phases. Do not stop after producing a plan or wireframes.
+
+## 2. PRODUCT VISION
+
+Product name: Sreemangal Explorer (working name; keep the brand configurable).
+
+Tagline: Explore Sreemangal. Your way.
+
+Market: Sreemangal and nearby attractions in the Moulvibazar area, Bangladesh.
+
+Primary audience:
+- Bangladeshi tourists planning trips with friends, family, or partners.
+- Visitors who want to explore attractions without wasting time finding transport.
+- Tourists who need transparent information about vehicles, local guides, routes, and approximate costs.
+
+Secondary audience:
+- Local CNG and Chander Gari operators.
+- Electric bike and bicycle rental providers where available.
+- Car and microbus providers.
+- Local guides and experience providers.
+- Future accommodation, restaurant, and activity partners.
+
+Business goal:
+Start with a zero-budget, locally operated marketplace. The founder is a frontend developer and can approach providers personally but does not yet have established provider partnerships. Initially coordinate booking requests manually by phone or WhatsApp. Validate demand and provider willingness before introducing complex automation.
+
+The platform must make it easier to discover places, understand transport options, compare useful service details, and request bookings. Revenue can come from a mutually agreed referral fee or commission for completed bookings. Do not charge providers by default during the validation stage.
+
+## 3. NON-NEGOTIABLE TECHNICAL RULES
+
+- Use Next.js App Router and JavaScript.
+- Never use TypeScript. No .ts or .tsx files.
+- Use Yarn for all package management and scripts.
+- Use Tailwind CSS.
+- Use shadcn/ui components for the interface.
+- Use Lucide React icons.
+- Use Supabase PostgreSQL for persistent data.
+- Use Supabase Auth for administrator authentication; design provider accounts as a future extension unless needed for the MVP.
+- Use Supabase Storage for uploaded images when configured.
+- Deploy on Vercel when ready.
+- Use server components by default and client components only where interactivity requires them.
+- Use server-side authorization and validated server actions or route handlers for mutations.
+- Use reusable components, shared schemas/validation, consistent error handling, and clear separation between UI and data access.
+- Do not introduce a separate backend service, Redux, an unnecessary state-management library, or paid third-party services without a clear requirement.
+- Never overwrite existing project configuration without inspecting it first.
+- Do not run duplicate dependency installation commands unnecessarily.
+- Keep the project runnable after each implementation phase.
+
+## 4. PRODUCT PRINCIPLES
+
+1. Mobile-first: many visitors will arrive from Facebook, Messenger, WhatsApp, or a mobile browser.
+2. Trust: show real provider information, clear terms, and accurate service details.
+3. Transparency: distinguish indicative prices from confirmed quotes.
+4. Manual-first operations: the founder can handle early bookings without complex automation.
+5. Zero-budget friendly: core functionality must work without paid APIs or paid integrations.
+6. Honest availability: never imply a provider or vehicle is available until availability has been confirmed.
+7. Local-first: focus on Sreemangal and nearby destinations, not all of Bangladesh.
+8. Real utility: prioritize destinations, transportation, local guides, and booking conversion over decorative features.
+9. Accessibility: keyboard navigation, visible focus states, semantic structure, sufficient contrast, and accessible form errors.
+10. Progressive development: ship the smallest useful product, validate it, then expand.
+
+## 5. VISUAL DESIGN AND BRAND
+
+Create a polished, premium travel experience. It should feel like a trustworthy modern travel startup, not a generic admin template.
+
+Visual direction:
+- Deep forest green as the main brand color.
+- Warm cream or off-white backgrounds.
+- Fresh leaf green for subtle accents.
+- Dark charcoal for primary text.
+- Natural, high-quality photography of Sreemangal tea gardens, rainforest, lakes, local transport, and authentic local experiences.
+- Spacious layouts, excellent typography, balanced whitespace, consistent radius and shadows, and refined transitions.
+- Use a legible font with Bengali script support.
+- Provide dark and light themes if they can be implemented cleanly, with a sensible default and no flashing theme transitions.
+- Avoid excessive gradients, neon colors, glassmorphism everywhere, oversized rounded cards, generic AI-generated-looking visuals, and excessive animations.
+- Use Lucide React icons consistently.
+- Use real image assets with permission or suitable licensed images. Optimize image sizes and aspect ratios. Never misrepresent stock imagery as an exact photo of a specific location or provider.
+- Every image needs appropriate alt text. Avoid unnecessary image downloads or external API dependencies.
+
+Build a coherent design system: colors, typography, spacing, borders, buttons, badges, form controls, cards, dialogs, toasts, and loading states.
+
+Use shadcn/ui for buttons, cards, inputs, select, textarea, form controls, dialogs, sheets, dropdowns, tabs, tables, badges, skeletons, alerts, and other appropriate components. Avoid raw HTML for elements with an appropriate shadcn component, while retaining semantic HTML where necessary.
+
+## 6. PUBLIC ROUTES AND PAGES
+
+Implement these routes with real data and working interactions.
+
+### A. Homepage (/)
+
+Purpose: Help visitors understand the product and quickly find destinations or transport.
+
+Sections:
+- Responsive navbar with logo, destinations, transport, guides, trip ideas, language selector placeholder or working language control, and a clear booking/inquiry CTA.
+- Hero section with authentic regional imagery, concise headline, and a primary CTA.
+- Search or quick discovery area for places and vehicle rentals.
+- Popular destinations.
+- Transport categories: CNG, Chander Gari, electric bikes where available, bicycles, cars, and microbuses.
+- Featured guides or local experiences when verified listings exist.
+- Suggested one-day and two-day trips.
+- Why use the platform: local information, transparent quotes, and direct coordination.
+- FAQ covering pricing, booking confirmation, cancellations, and whether the platform owns vehicles.
+- Footer with contact, service area, policies, and social links only when configured.
+
+Do not fabricate ratings, customer counts, testimonials, popularity metrics, discounts, or partner logos.
+
+### B. Destinations (/places)
+
+- Search and filter by category and area.
+- Cards with image, name, short description, location, and useful travel information.
+- Responsive grid and empty states.
+- Query-string-based filters where practical.
+- Accurate data from the database.
+
+### C. Destination details (/places/[slug])
+
+Show:
+- Name, gallery, description, and location.
+- Category and best-known activities.
+- Visiting tips and accessibility or access caveats where known.
+- Opening hours and fees only when verified.
+- Approximate travel time from a clearly identified starting point when reliable information exists.
+- Nearby destinations and suggested combinations.
+- Suitable transport options.
+- Map link using coordinates or a verified address.
+- A CTA to request transport or a guide.
+
+Never invent coordinates, entry fees, access permissions, opening times, travel times, or seasonal conditions.
+
+### D. Transport directory (/transport)
+
+- Filter by vehicle type, seating capacity, service area, and indicative price when available.
+- Search and sort by relevant attributes.
+- Clear price units: per trip, half-day, full-day, or other explicitly specified arrangement.
+- Display provider, capacity, included driver, routes, baggage details where known, and last-verified date.
+- Mark prices as indicative unless confirmed.
+- Clearly distinguish an inquiry from a confirmed booking.
+- Use responsive filters and accessible controls.
+
+### E. Transport details (/transport/[slug])
+
+Show:
+- Vehicle/service photos.
+- Vehicle category and passenger capacity.
+- Provider name and verified status where appropriate.
+- Supported routes and trip types.
+- Price basis and inclusions/exclusions.
+- Availability information, only if confirmed.
+- Pickup options.
+- Booking request form.
+- WhatsApp contact link when the provider has authorized publication of the number.
+- Clear cancellation, payment, and confirmation messaging.
+
+### F. Local guides (/guides)
+
+- Directory of participating guides.
+- Specialty, languages, service areas, group-size limits, and indicative pricing when verified.
+- Profile detail pages and booking inquiry forms.
+- Never fabricate certifications, reviews, qualifications, or language fluency.
+
+### G. Trip ideas (/trips)
+
+- Curated one-day and two-day itineraries.
+- Ordered stops and suggested durations.
+- Suitable transport recommendations.
+- Estimated costs only where supported by actual data, clearly labeled as estimates.
+- Notes about distance, travel logistics, and access.
+- A CTA to request a vehicle or guide.
+
+Initially, itineraries are curated by the admin. Do not add AI itinerary generation to the MVP.
+
+### H. About and contact (/about, /contact)
+
+Explain that the platform connects tourists with independent local service providers. It does not necessarily own vehicles, employ every guide, or control all third-party services.
+
+Include a working contact/inquiry form with validation and spam protection. Show only real contact information configured by the founder.
+
+### I. Policies
+
+Create editable policy pages for privacy, terms, booking requests, cancellations, and provider relationships. Explain when a request becomes confirmed, how quotes are agreed, who supplies the service, and how disputes can be reported. Keep legal language factual and suitable for later local legal review.
+
+## 7. BOOKING EXPERIENCE
+
+This is the most important workflow.
+
+For the MVP, bookings are requests, not instant reservations.
+
+Booking form fields:
+- Service type: transport or guide.
+- Selected listing when applicable.
+- Requested date.
+- Optional start time.
+- Number of people.
+- Pickup location.
+- Intended destinations or route.
+- Trip duration.
+- Customer name.
+- Phone number.
+- Optional email.
+- Additional notes.
+- Consent to be contacted about this request and acknowledgement of the relevant privacy notice.
+
+Validate all fields on the server. Reject malformed phone numbers, invalid dates, oversized inputs, and unauthorized listing IDs. Use appropriate rate limiting or practical anti-spam controls.
+
+Workflow:
+1. Customer submits a request.
+2. Server validates input and saves the request in Supabase.
+3. Show a clear success state and unique reference number.
+4. Notify the administrator using a configured channel if available; otherwise, show the request in the admin dashboard.
+5. Admin checks provider availability and contacts the provider.
+6. Admin records the quote and relevant terms.
+7. Admin communicates the quote to the customer.
+8. Customer accepts or declines.
+9. Booking status is updated.
+10. After the trip, mark the booking completed or cancelled and record the agreed referral fee or commission.
+
+Use these states:
+- new
+- reviewing
+- awaiting_provider
+- quoted
+- awaiting_customer
+- confirmed
+- completed
+- cancelled
+- rejected
+
+Implement allowed state transitions and record timestamps. Do not allow arbitrary status changes without authorization.
+
+A customer should never see a booking marked confirmed until a provider has agreed to the arrangement and the customer has accepted the terms.
+
+Allow the admin to record:
+- Selected provider.
+- Quote amount and currency.
+- Quote details and inclusions.
+- Customer acceptance.
+- Provider confirmation.
+- Payment arrangement, if applicable.
+- Agreed commission model and amount.
+- Completion status.
+- Internal notes.
+
+Do not collect payment card information or claim online payments are supported unless a real payment provider is integrated and tested.
+
+## 8. WHATSAPP INTEGRATION
+
+Provide a WhatsApp CTA where it improves conversion.
+
+Requirements:
+- Use wa.me links with a valid international-format phone number.
+- URL-encode prefilled message text.
+- Prefill a useful message containing the listing or booking reference, requested date, and inquiry.
+- Never expose private customer information in a public link or URL.
+- Do not publish a provider's number without permission.
+- Do not claim WhatsApp messages are sent automatically. The visitor must initiate the message unless an authorized WhatsApp Business API is implemented later.
+- Provide a fallback if no contact number is configured.
+
+A WhatsApp CTA must not replace server-side booking creation when the user has submitted the booking form.
+
+## 9. ADMIN DASHBOARD
+
+Routes under /admin should require an authenticated and authorized administrator.
+
+### Dashboard overview
+- New inquiries.
+- Requests awaiting provider confirmation.
+- Confirmed upcoming bookings.
+- Completed bookings.
+- Cancellations.
+- Gross booking value for completed bookings where recorded.
+- Agreed commissions and collected commissions.
+- Recent activity.
+
+Label financial metrics correctly. Revenue, commission earned, and commission collected are different values. Do not count a pending commission as received revenue.
+
+### Destination management
+- Create, edit, publish, unpublish, and archive destinations.
+- Manage descriptions, slugs, photos, categories, coordinates, verified access details, and related places.
+- Validate unique slugs.
+
+### Transport management
+- Create and edit provider and vehicle listings.
+- Configure vehicle type, passenger capacity, routes, pricing basis, inclusions, contact details, and publication status.
+- Mark listing verification and last verification date.
+- Flag outdated prices for review.
+
+### Guide management
+- Manage profiles, languages, specialties, service areas, pricing, and contact details.
+- Publish only after the necessary information and permissions have been verified.
+
+### Booking management
+- Filter by date, service, status, and provider.
+- View customer requests.
+- Assign a provider.
+- Record quotes and confirmations.
+- Update allowed booking states.
+- Record cancellation reasons and internal notes.
+- Mark completed bookings and calculate agreed commission amounts.
+- Track commission payment status separately.
+- Contact customers only for the stated inquiry and permitted purposes.
+
+### Provider management
+- Record provider details and preferred contact method.
+- Store the agreed referral or commission terms.
+- Track provider active/inactive status.
+- Keep private internal notes separate from public information.
+
+### Settings
+- Brand name, logo, support contact, social links, service area, currency, default language, and WhatsApp number.
+- Configurable homepage featured items.
+- Default booking policy text.
+- All settings must be validated and authorized.
+
+Use reusable table, filter, dialog, form, and status-badge components. Add pagination where lists can grow. Include loading, empty, success, and error states.
+
+## 10. DATABASE DESIGN
+
+Create SQL migrations in version control. Use UUID primary keys where appropriate, timestamps, foreign keys, constraints, and indexes.
+
+Recommended initial tables:
+
+### profiles
+- id: UUID referencing auth.users.
+- display_name.
+- role: admin or provider.
+- phone, optional.
+- created_at, updated_at.
+
+Do not let a user set their own admin role. Privileged role changes must be performed by a trusted administrator or secure server-side process.
+
+### places
+- id.
+- name.
+- slug, unique.
+- short_description.
+- description.
+- category.
+- area.
+- latitude, nullable.
+- longitude, nullable.
+- cover_image_path, nullable.
+- gallery, if implemented using a validated schema or related table.
+- visiting_information, nullable.
+- access_notes, nullable.
+- opening_hours, nullable.
+- entry_fee_information, nullable.
+- verification_status.
+- last_verified_at.
+- published.
+- created_at, updated_at.
+
+### providers
+- id.
+- display_name.
+- provider_type.
+- public_contact_number, nullable.
+- private_contact_details where needed.
+- verification_status.
+- active.
+- agreed_commission_type.
+- agreed_commission_value, nullable.
+- internal_notes, protected.
+- created_at, updated_at.
+
+### vehicles
+- id.
+- provider_id.
+- name.
+- slug, unique.
+- vehicle_type.
+- passenger_capacity.
+- driver_included, nullable.
+- luggage_details, nullable.
+- supported_routes.
+- pricing_basis.
+- indicative_price, nullable.
+- currency, default BDT.
+- inclusions, nullable.
+- exclusions, nullable.
+- cover_image_path, nullable.
+- published.
+- last_price_verified_at.
+- created_at, updated_at.
+
+### guides
+- id.
+- provider_id, if the guide is represented by a provider.
+- name.
+- slug, unique.
+- description.
+- languages.
+- specialties.
+- service_areas.
+- group_size_limit, nullable.
+- indicative_price, nullable.
+- pricing_basis, nullable.
+- verification_status.
+- published.
+- created_at, updated_at.
+
+### booking_requests
+- id.
+- public_reference, unique and unpredictable.
+- customer_name.
+- customer_phone.
+- customer_email, nullable.
+- service_type.
+- vehicle_id, nullable.
+- guide_id, nullable.
+- requested_date.
+- requested_start_time, nullable.
+- group_size.
+- pickup_location.
+- itinerary_details.
+- requested_duration, nullable.
+- customer_notes, nullable.
+- status.
+- assigned_provider_id, nullable.
+- quoted_amount, nullable.
+- currency.
+- quote_details, nullable.
+- provider_confirmed_at, nullable.
+- customer_accepted_at, nullable.
+- confirmed_at, nullable.
+- completed_at, nullable.
+- cancelled_at, nullable.
+- cancellation_reason, nullable.
+- commission_type, nullable.
+- agreed_commission_value, nullable.
+- commission_amount, nullable.
+- commission_payment_status.
+- commission_collected_at, nullable.
+- internal_notes, protected.
+- created_at, updated_at.
+
+Ensure exactly one relevant service selection for a transport or guide request where appropriate, and validate the relationship at the database or server layer. Consider an additional constraints/migration strategy if polymorphic references are used.
+
+### booking_status_history
+- id.
+- booking_request_id.
+- previous_status.
+- new_status.
+- changed_by.
+- reason, nullable.
+- created_at.
+
+### reviews
+Only implement customer reviews if a reliable completed-booking relationship and moderation process exist.
+- id.
+- booking_request_id.
+- rating.
+- comment, nullable.
+- moderation_status.
+- created_at.
+
+Do not seed fake reviews.
+
+You may normalize pricing, images, itineraries, and provider contacts into additional tables if the implementation benefits. Avoid overengineering.
+
+Use numeric database types for money and store currency explicitly. Store dates and timestamps consistently, and render dates in the appropriate local timezone.
+
+## 11. SUPABASE SECURITY
+
+Security is required from the beginning.
+
+- Enable Row Level Security on all tables exposed through the API.
+- Public users may read only published, public destination and listing data.
+- Never allow anonymous users to read booking requests, private provider contact details, internal notes, or customer information.
+- Anonymous booking creation must use a controlled server-side endpoint or server action with validation and rate limiting. Do not grant broad public SELECT, UPDATE, or DELETE privileges on booking tables.
+- Admin mutations require verified server-side authorization, not merely a hidden UI.
+- Protect all privileged routes and mutations.
+- Store Supabase service-role credentials only in server-only environment variables and never in client bundles.
+- Validate all user input on the server.
+- Protect against spam, abuse, mass submissions, and enumeration of booking references.
+- Use unpredictable booking references and avoid exposing sequential database IDs.
+- Limit image uploads by file type and size.
+- Sanitize rendered user content appropriately.
+- Keep private fields out of public queries and responses.
+- Avoid logging phone numbers, credentials, tokens, or unnecessary personal data.
+- Document a secure bootstrap process for the first administrator. Do not create a hardcoded default admin account.
+- Test RLS and authorization with anonymous, ordinary authenticated, and administrator roles.
+
+Do not claim the application is secure until the relevant policies and tests have been implemented.
+
+## 12. SEARCH, SEO, AND PERFORMANCE
+
+- Use server-rendered pages for public destinations and listings where appropriate.
+- Add unique page titles, meta descriptions, canonical URLs, Open Graph metadata, and social previews.
+- Generate sitemap.xml and robots.txt.
+- Use clean, stable slugs.
+- Add relevant structured data only when the page satisfies the applicable schema requirements.
+- Support search by destination and vehicle type.
+- Use query parameters for shareable filters.
+- Add pagination for growing datasets.
+- Optimize images and prevent layout shifts.
+- Use loading skeletons where appropriate.
+- Keep JavaScript bundles small.
+- Add meaningful 404 and error pages.
+- Avoid paid map APIs in the initial release. Provide external map links using verified coordinates or addresses.
+- Do not claim to provide live navigation or accurate travel-time estimates unless those features are actually implemented and their data sources support them.
+
+## 13. BANGLA AND ENGLISH
+
+Design for Bangladeshi users.
+
+- Use Bangladesh Taka (৳ / BDT) for local pricing.
+- Support Bangla and English content.
+- Use a font with reliable Bengali glyph coverage.
+- Format dates and phone numbers appropriately.
+- Make phone and WhatsApp actions easy to use on mobile.
+- Ensure forms work well on small screens and slower connections.
+- Keep text simple and understandable.
+- Avoid automatically translating verified place names or changing their spelling without review.
+
+Build language support in a maintainable way. If a complete translation system is too large for the first iteration, implement a clean English MVP with an architecture ready for reviewed Bangla translations. Do not show a nonfunctional language toggle.
+
+## 14. ZERO-BUDGET OPERATIONS
+
+The initial product must be useful without paid integrations.
+
+- Manually onboard providers.
+- Manually verify prices and routes.
+- Manually confirm availability.
+- Use WhatsApp and phone calls for coordination.
+- Use Supabase's available free-tier services where sufficient, subject to their current limits.
+- Use a free deployment tier where suitable, subject to its current terms and limits.
+- Provide an admin dashboard instead of paying for a CRM.
+- Use local assets or permitted image sources.
+- Do not require online payment processing for the MVP.
+- Keep third-party integrations optional and fail gracefully when not configured.
+
+The application should remain functional if email notifications, analytics, or WhatsApp API integrations are not configured.
+
+## 15. TESTING AND ACCEPTANCE CRITERIA
+
+Implement tests appropriate to the existing repository and stack.
+
+At minimum verify:
+
+1. Public users can view published destinations and listings.
+2. Unpublished destinations and listings are not exposed publicly.
+3. Search and filters behave correctly.
+4. Invalid booking requests are rejected.
+5. A valid booking request is stored and produces a reference number.
+6. Public users cannot read or modify booking records.
+7. Non-admin users cannot access admin routes or privileged mutations.
+8. Admins can create and edit destinations and listings.
+9. Booking status transitions are validated and recorded.
+10. A booking cannot become confirmed without the required provider confirmation and customer acceptance.
+11. Commission calculations follow the agreed terms and rounding rules.
+12. Commission collected is tracked separately from commission earned.
+13. WhatsApp links are correctly encoded and omitted when no authorized number is available.
+14. Forms provide useful validation, loading, success, and error states.
+15. Pages remain usable on mobile, tablet, and desktop.
+16. The app handles empty databases without crashing.
+17. No service-role secrets or other private credentials appear in client bundles.
+18. The project passes linting, available tests, and production build checks.
+
+Use realistic sample data only where explicitly marked as demonstration content. Never present sample prices, reviews, providers, or availability as real.
+
+## 16. IMPLEMENTATION PHASES
+
+Work incrementally and keep the application working after every phase.
+
+Phase 1: Inspect the repository, define architecture, initialize missing configuration, establish the design system, and implement public page layouts.
+
+Phase 2: Create SQL migrations, configure Supabase, implement public data access, seed clearly marked sample destinations, and build the destination directory.
+
+Phase 3: Implement providers, transport listings, guide profiles, and their detail pages.
+
+Phase 4: Build booking forms, server-side validation, request persistence, reference generation, and the manual inquiry workflow.
+
+Phase 5: Implement secure admin authentication, authorization, dashboard, listing management, and booking management.
+
+Phase 6: Add price and commission tracking, provider verification workflows, SEO, accessibility, error handling, and responsive polish.
+
+Phase 7: Test authorization, booking state transitions, database policies, production build, and deployment readiness.
+
+After each phase:
+- Summarize what was implemented.
+- List files and migrations created.
+- Run relevant tests and report their actual results.
+- Explain any required environment variables.
+- Identify blockers without hiding them.
+- Continue to the next phase unless a genuine external dependency or missing credential requires the user's action.
+
+Do not stop after generating a homepage or design mockup. Complete a working vertical slice from public listing to booking request to authorized admin review.
+
+## 17. PROJECT DOCUMENTATION
+
+Create a useful README.md containing:
+- Product overview.
+- Technology stack.
+- Prerequisites.
+- Yarn installation and development commands.
+- Supabase project setup.
+- Environment variable reference using .env.example with placeholders only.
+- Migration and seed instructions.
+- Secure first-admin setup.
+- Storage setup if used.
+- Local development instructions.
+- Testing and production build commands.
+- Vercel deployment instructions.
+- Current limitations and future roadmap.
+
+Do not place real credentials in source control. Do not assume the user's Supabase project has already been configured.
+
+## 18. OUT OF SCOPE FOR THE MVP
+
+Do not implement these unless specifically requested after validation:
+- Native mobile applications.
+- Live GPS vehicle tracking.
+- Complex automated availability calendars.
+- Instant booking without provider confirmation.
+- Online payment gateways or escrow.
+- Automated refunds or payouts.
+- AI itinerary generation.
+- Loyalty programs.
+- Subscription plans for providers.
+- Multi-city marketplace management.
+- Microservices or unnecessary abstractions.
+- Fake analytics, reviews, or fabricated social proof.
+
+Keep the architecture extensible enough to add these later if real demand justifies them.
+
+## 19. DEFINITION OF DONE
+
+The MVP is complete when:
+- The public site is polished and responsive.
+- Real destinations and participating provider listings can be managed.
+- Visitors can submit valid booking requests.
+- Requests persist securely and appear in the authorized admin dashboard.
+- Admins can coordinate, quote, confirm, complete, or cancel requests with an auditable history.
+- The agreed referral fee or commission can be tracked.
+- Private information is protected by server-side authorization and database policies.
+- Empty states, loading states, errors, and successful interactions are implemented.
+- Documentation allows another developer to run the project.
+- Linting, relevant tests, and the production build have been executed, with any failures explicitly reported.
+
+Prioritize reliability, trust, and booking conversion over feature count. Build the product as a real business tool, not a disposable demo.
+
+Start by inspecting the existing repository and then implement Phase 1.
